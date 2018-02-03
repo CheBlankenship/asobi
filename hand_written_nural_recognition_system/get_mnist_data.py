@@ -1,15 +1,26 @@
 import sys, os
 sys.path.append(os.pardir)
-from dataset.mnist import load_mnist # load_mnist()を呼び出す
+import numpy as np
+from dataset.mnist import load_mnist # import load_mnist method
+from PIL import Image # Python Image Library
 
-# 最初の呼び出し
+
+def img_show(img):
+    pil_img = Image.fromarray(np.uint8(img)) # Convert NumPy format to PIL data object
+    pil_img.show()
+
+
+# Load the MNIST dataset by calling load_mnist method
 (x_train, t_train), (x_test, t_test) = \
-
-# Load the MNIST dataset by calling load_mnist()
 load_mnist(flatten=True, normalize=False, one_hot_label=False)
 
-#それぞれのデータの形状を出力
-print(x_train.shape)
-print(t_train.shape)
-print(x_test.shape)
-print(t_test.shape)
+
+img = x_train[0]
+label = t_train[0]
+print(label)
+
+print(img.shape)
+img = img.reshape(28, 28)
+print(img.shape)
+
+img_show(img)
